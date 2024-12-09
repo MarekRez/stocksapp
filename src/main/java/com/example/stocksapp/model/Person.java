@@ -1,5 +1,5 @@
 package com.example.stocksapp.model;
 
-public class Client {
+public class Person {
     String email;
 }
