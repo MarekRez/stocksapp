@@ -22,6 +22,11 @@ public class Stock {
         this.totalShares = totalShares;
     }
 
+    // Overloaded constructor that assumes a default value of 0 for totalShares
+    public Stock(StockSymbol name, String currency, double stockPrice, double dividendYield, double volatility, double expectedReturn) {
+        this(name, currency, stockPrice, dividendYield, volatility, expectedReturn, 0); // Default totalShares is 0
+    }
+
     // Getters and setters for all properties
     public StockSymbol getName() {
         return name;
