@@ -46,4 +46,8 @@ public class Account {
             return false; // Withdrawal failed
         }
     }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
 }
