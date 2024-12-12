@@ -41,24 +41,24 @@ public class Person {
         this.investmentAccount = newInvestmentAccount;
     }
 
-//    // Method to deposit funds from investment account to bank account
-//    public void depositToBank(double amount) {
-//        if (amount <= this.investmentAccount.getBalance()) {
-//            this.investmentAccount.withdraw(amount); // calling withdraw from Account
-//            this.bankAccount.deposit(amount); // calling deposit from BankAccount
-//            System.out.println("Deposited " + String.format("%.2f", amount) + " to bank account " + this.bankAccount.getIban() + ". New bank balance: " + String.format("%.2f", this.bankAccount.getBalance()));
-//        } else {
-//            System.out.println("Deposit to bank failed: Insufficient funds in investment account.");
-//        }
-//    }
-//
-//    // Method to withdraw funds from bank account to investment account
-//    public void withdrawFromBank(double amount) {
-//        if (this.bankAccount.withdraw(amount)) {
-//            this.investmentAccount.deposit(amount);
-//            System.out.println("Withdrawn " + String.format("%.2f", amount) + " from bank account " + this.bankAccount.getIban() + ". New investment balance: " + String.format("%.2f", this.investmentAccount.getBalance()));
-//        } else {
-//            System.out.println("Withdrawal failed: Insufficient funds in bank account.");
-//        }
-//    }
+    // deposit funds from investment account to bank account
+    public void depositToBank(double amount) {
+        if (amount <= this.investmentAccount.getBalance()) {
+            this.investmentAccount.withdraw(amount); // calling withdraw from Account
+            this.bankAccount.deposit(amount); // calling deposit from BankAccount
+            System.out.println("Deposited " + String.format("%.2f", amount) + " to bank account " + this.bankAccount.getIban() + ". New bank balance: " + String.format("%.2f", this.bankAccount.getBalance()));
+        } else {
+            System.out.println("Deposit to bank failed: Insufficient funds in investment account.");
+        }
+    }
+
+    // withdraw funds from bank account to investment account
+    public void withdrawFromBank(double amount) {
+        if (this.bankAccount.withdraw(amount)) {
+            this.investmentAccount.deposit(amount);
+            System.out.println("Withdrawn " + String.format("%.2f", amount) + " from bank account " + this.bankAccount.getIban() + ". New investment balance: " + String.format("%.2f", this.investmentAccount.getBalance()));
+        } else {
+            System.out.println("Withdrawal failed: Insufficient funds in bank account.");
+        }
+    }
 }
