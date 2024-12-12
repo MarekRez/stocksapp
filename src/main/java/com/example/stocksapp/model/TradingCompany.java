@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TradingCompany {
-    private List<Person> clients = new ArrayList<>(); // List of clients (Person objects)
+    private List<Person> clients = new ArrayList<>();
 
     // Add a new client
     public void addClient(Person newClient) {

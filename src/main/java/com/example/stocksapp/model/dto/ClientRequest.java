@@ -7,7 +7,6 @@ public class ClientRequest {
     private double bankAccountBalance;
     private double investmentAccountBalance;
 
-    // Getters and Setters
     public String getName() {
         return name;
     }

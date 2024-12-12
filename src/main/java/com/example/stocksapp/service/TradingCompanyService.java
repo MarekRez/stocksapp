@@ -11,39 +11,34 @@ import java.util.List;
 @Service
 public class TradingCompanyService {
 
-    private TradingCompany tradingCompany = new TradingCompany(); // The data holder for clients
+    private TradingCompany tradingCompany = new TradingCompany(); // The data holder
 
-    // Add a new client
     public Person addClient(String name, String email, double bankAccountBalance, double investmentAccountBalance) {
-        // Create the bank account and investment account
+
         BankAccount bankAccount = new BankAccount(bankAccountBalance);
         Account investmentAccount = new Account(investmentAccountBalance, bankAccount);
 
-        // Create the new Person (client)
+
         Person person = new Person(name, email, bankAccount, investmentAccount);
 
-        // Add the client to the TradingCompany object
         tradingCompany.addClient(person);
 
         return person;
     }
 
-    // Get all clients
     public List<Person> getAllClients() {
-        return tradingCompany.getAllClients();  // Fetching all clients from TradingCompany
+        return tradingCompany.getAllClients();
     }
 
-    // Get a client by email
     public Person getClientByEmail(String email) {
-        return tradingCompany.getClientByEmail(email);  // Fetching a client by email
+        return tradingCompany.getClientByEmail(email);
     }
 
-    // Update a client by email
     public Person updateClientByEmail(String email, Person updatedClient) {
         Person client = tradingCompany.getClientByEmail(email);
 
         if (client != null) {
-            // Update client properties
+
             if (updatedClient.getName() != null) {
                 client.setName(updatedClient.getName());
             }
@@ -60,11 +55,10 @@ public class TradingCompanyService {
         return null; // If client not found
     }
 
-    // Delete a client by email
     public boolean deleteClientByEmail(String email) {
         Person client = tradingCompany.getClientByEmail(email);
         if (client != null) {
-            // Remove client from the TradingCompany list
+
             tradingCompany.getAllClients().remove(client);
             return true;
         }

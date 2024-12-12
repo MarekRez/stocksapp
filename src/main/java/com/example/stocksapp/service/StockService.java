@@ -3,12 +3,14 @@ package com.example.stocksapp.service;
 import com.example.stocksapp.model.Stock;
 import org.springframework.stereotype.Service;
 
+// unused for now
+
 @Service
 public class StockService {
 
     // Method to buy stock
     public void buyStock(Stock stock, int sharesToBuy) {
-        // Logic to update stock shares and handle transaction
+
         stock.setTotalShares(stock.getTotalShares() + sharesToBuy);
         System.out.println("Bought " + sharesToBuy + " shares of " + stock.getName());
     }

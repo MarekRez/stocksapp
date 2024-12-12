@@ -21,12 +21,10 @@ public enum StockSymbol {
 
     private final String symbol;
 
-    // Constructor
     StockSymbol(String symbol) {
         this.symbol = symbol;
     }
 
-    // Getter method for symbol
     public String getSymbol() {
         return symbol;
     }

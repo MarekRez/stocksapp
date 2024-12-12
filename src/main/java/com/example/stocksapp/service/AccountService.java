@@ -3,10 +3,11 @@ package com.example.stocksapp.service;
 import com.example.stocksapp.model.Account;
 import org.springframework.stereotype.Service;
 
+// unused for now
+
 @Service
 public class AccountService {
 
-    // Method to deposit money into an account
     public void depositToAccount(Account account, double amount) {
         if (amount > 0) {
             account.setBalance(account.getBalance() + amount);
@@ -16,7 +17,6 @@ public class AccountService {
         }
     }
 
-    // Method to withdraw money from an account
     public boolean withdrawFromAccount(Account account, double amount) {
         if (account.getBalance() >= amount) {
             account.setBalance(account.getBalance() - amount);
@@ -27,6 +27,4 @@ public class AccountService {
             return false;
         }
     }
-
-    // Additional methods for account-related operations can go here
 }
