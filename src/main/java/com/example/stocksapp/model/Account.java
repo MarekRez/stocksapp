@@ -1,16 +1,33 @@
 package com.example.stocksapp.model;
+import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Account {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @OneToMany
+    @JoinColumn(name = "account_id") // Foreign key column in the Stock table
     private List<Stock> stocks; // List of stocks
+
+    @Column(name = "account_balance")
     private double balance;
+
+    @Embedded
+//    @Column(name = "bank_account")
     private BankAccount bankAccount;
 
     public Account(double initialBalance, BankAccount bankAccount) {
         this.stocks = new ArrayList<>();
         this.balance = initialBalance;
         this.bankAccount = bankAccount;
+    }
+
+    public Account() {
     }
 
     public List<Stock> getStocks() {
@@ -46,5 +63,17 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public void addStock(Stock stock) {
+        if (stock.getStockPrice() * stock.getTotalShares() > this.balance) {
+            System.out.println("Insufficient funds to buy stock.");
+            return;
+        }
+        this.balance -= stock.getStockPrice() * stock.getTotalShares();
+        this.stocks.add(stock);
+        System.out.println("Bought " + stock.getTotalShares() + " shares of " + stock.getName() +
+                " for " + stock.getStockPrice() * stock.getTotalShares() + ". New balance: " + this.balance);
+
     }
 }

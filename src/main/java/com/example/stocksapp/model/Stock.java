@@ -1,6 +1,13 @@
 package com.example.stocksapp.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Stock {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Enumerated(EnumType.STRING)
     private StockSymbol name;
     private String currency;
     private double stockPrice;
@@ -25,6 +32,9 @@ public class Stock {
     // Overloaded constructor - default totalShares = 0
     public Stock(StockSymbol name, String currency, double stockPrice, double dividendYield, double volatility, double expectedReturn) {
         this(name, currency, stockPrice, dividendYield, volatility, expectedReturn, 0); // Default totalShares is 0
+    }
+
+    public Stock() {
     }
 
     public StockSymbol getName() {

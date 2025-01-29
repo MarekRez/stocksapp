@@ -1,10 +1,19 @@
 package com.example.stocksapp.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Person {
+
     private String name;
+    @Id
     private String email;
+    @Embedded
     private BankAccount bankAccount; // bank account
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Account investmentAccount; // investment account
+    public Person() {
+    }
 
     public Person(String name, String email, BankAccount bankAccount, Account investmentAccount) {
         this.name = name;

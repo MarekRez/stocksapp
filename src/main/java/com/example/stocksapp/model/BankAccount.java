@@ -1,6 +1,9 @@
 package com.example.stocksapp.model;
+import jakarta.persistence.Embeddable;
+
 import java.util.Random;
 
+@Embeddable
 public class BankAccount {
     private String iban;
     private double balance;
@@ -8,6 +11,9 @@ public class BankAccount {
     public BankAccount(double initialBalance) {
         this.iban = generateIBAN(); // Generates a new IBAN
         this.balance = initialBalance;
+    }
+
+    public BankAccount() {
     }
 
     private String generateIBAN() {
