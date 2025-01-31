@@ -1,5 +1,6 @@
 package com.example.stocksapp.service;
 
+import com.example.stocksapp.exception.ResourceNotFoundException;
 import com.example.stocksapp.model.BankAccount;
 import com.example.stocksapp.model.Person;
 import com.example.stocksapp.model.TradingCompany;
@@ -34,6 +35,11 @@ public class TradingCompanyService {
 //    }
 
 public Person addClient(String name, String email, double bankAccountBalance, double investmentAccountBalance) {
+
+    if (personRepository.existsById(email)) {
+        throw new IllegalArgumentException("Person with email " + email + " already exists!");
+    }
+
     BankAccount bankAccount = new BankAccount(bankAccountBalance);
     Account investmentAccount = new Account(investmentAccountBalance, bankAccount);
     Person person = new Person(name, email, bankAccount, investmentAccount);
@@ -59,7 +65,8 @@ public List<Person> getAllClients() {
 //    }
 
 public Person getClientByEmail(String email) {
-    return personRepository.findById(email).orElse(null); // Return null if not found
+    return personRepository.findById(email)
+            .orElseThrow(() -> new ResourceNotFoundException("Person with email " + email + " not found"));
 }
 
 //    public Person updateClientByEmail(String email, Person updatedClient) {

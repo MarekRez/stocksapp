@@ -21,8 +21,12 @@ public class TradingCompanyController {
     // Add a new client
     @PostMapping
     public Person addClient(@RequestBody ClientRequest clientRequest) {
-        return tradingCompanyService.addClient(clientRequest.getName(), clientRequest.getEmail(),
-                clientRequest.getBankAccountBalance(), clientRequest.getInvestmentAccountBalance());
+        return tradingCompanyService.addClient(
+                clientRequest.getName(),
+                clientRequest.getEmail(),
+                clientRequest.getBankAccountBalance(),
+                clientRequest.getInvestmentAccountBalance()
+        );
 }
 
     @GetMapping

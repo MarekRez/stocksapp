@@ -38,6 +38,10 @@ public class Account {
         return this.balance;
     }
 
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
     // Deposit money
     public void deposit(double amount) {
         if (this.bankAccount.withdraw(amount)) {
@@ -61,19 +65,4 @@ public class Account {
         }
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
-    }
-
-    public void addStock(Stock stock) {
-        if (stock.getStockPrice() * stock.getTotalShares() > this.balance) {
-            System.out.println("Insufficient funds to buy stock.");
-            return;
-        }
-        this.balance -= stock.getStockPrice() * stock.getTotalShares();
-        this.stocks.add(stock);
-        System.out.println("Bought " + stock.getTotalShares() + " shares of " + stock.getName() +
-                " for " + stock.getStockPrice() * stock.getTotalShares() + ". New balance: " + this.balance);
-
-    }
 }

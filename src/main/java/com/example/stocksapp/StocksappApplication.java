@@ -14,7 +14,7 @@ public class StocksappApplication {
 	}
 
 	@Configuration
-	public class WebConfig implements WebMvcConfigurer {
+	public static class WebConfig implements WebMvcConfigurer {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
 			// Allow all origins
