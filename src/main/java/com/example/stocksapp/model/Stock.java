@@ -2,6 +2,8 @@ package com.example.stocksapp.model;
 
 import jakarta.persistence.*;
 
+import java.util.Random;
+
 @Entity
 public class Stock {
     @Id
@@ -35,6 +37,58 @@ public class Stock {
     }
 
     public Stock() {
+    }
+
+    public Stock(String stockSymbol, String currency, double stockPrice, double dividendYield, double volatility, double expectedReturn, double totalShares) {
+    }
+
+    private static double gaussianRandom() {
+        Random random = new Random();
+        return random.nextGaussian(); // Simulates normal distribution for price movements
+    }
+
+    private void simulatePriceChange() {
+        double timeStep = 1.0 / 12;
+        double Z = gaussianRandom();
+        double drift = (expectedReturn - (volatility * volatility) / 2) * timeStep;
+        double diffusion = volatility * Math.sqrt(timeStep) * Z;
+        this.stockPrice *= Math.exp(drift + diffusion);
+    }
+
+    private void reinvestDividends() {
+        double monthlyDividend = (totalShares * stockPrice * dividendYield) / 12;
+        double newShares = monthlyDividend / stockPrice;
+        this.totalShares += (int) newShares;
+    }
+
+    public StockResult simulateMonth() {
+        simulatePriceChange();
+        reinvestDividends();
+        return new StockResult(stockPrice, totalShares, totalShares * stockPrice);
+    }
+
+    public static class StockResult {
+        private final double monthPrice;
+        private final double totalShares;
+        private final double balance;
+
+        public StockResult(double monthPrice, double totalShares, double balance) {
+            this.monthPrice = monthPrice;
+            this.totalShares = totalShares;
+            this.balance = balance;
+        }
+
+        public double getMonthPrice() {
+            return monthPrice;
+        }
+
+        public double getTotalShares() {
+            return totalShares;
+        }
+
+        public double getBalance() {
+            return balance;
+        }
     }
 
     public StockSymbol getName() {
@@ -85,12 +139,11 @@ public class Stock {
         this.expectedReturn = expectedReturn;
     }
 
-    public int getTotalShares() {
-        return totalShares;
-    }
+    public int getTotalShares() {return totalShares;}
 
     public void setTotalShares(int totalShares) {
         this.totalShares = totalShares;
     }
+
 }
 
